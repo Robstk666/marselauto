@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="ru" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MARSEL AUTO | Premium Detailing</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@1,900&family=Orbitron:wght@700&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'marsel-black': '#050505',
+                        'marsel-blue': '#2563eb',
+                    },
+                    fontFamily: {
+                        'sport': ['Montserrat', 'sans-serif'], 
+                    },
+                    backgroundImage: {
+                        'chrome': 'linear-gradient(180deg, #FFFFFF 20%, #A0A0A0 50%, #FFFFFF 85%)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* ЛОГОТИП ГРАДИЕНТ (ХРОМ) */
+        .brand-text {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 900;
+            font-style: italic;
+            background: linear-gradient(180deg, #FFFFFF 10%, #bfbfbf 45%, #FFFFFF 80%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            /* Легкая тень, чтобы текст читался на любом фоне */
+            filter: drop-shadow(0 2px 0px rgba(0,0,0,0.5));
+            letter-spacing: -0.04em; /* Плотная кернинг как на фото */
+        }
+
+        /* ПОЛОСКИ M-STYLE */
+        /* Используем skew-x-[-12deg], чтобы угол совпадал с курсивом Montserrat Black Italic */
+        .m-stripes-container {
+            display: flex;
+            align-items: center;
+            height: 0.72em; /* Высота подгоняется под высоту букв */
+            transform: skewX(-12deg); 
+            margin-right: 0.15em; /* МИНИМАЛЬНЫЙ ОТСТУП к букве M */
+        }
+
+        .m-stripe {
+            width: 0.28em; /* Ширина полоски */
+            height: 100%;
+            margin-right: 0.08em; /* Расстояние между самими полосками */
+        }
+        
+        /* Цвета полосок с легким свечением */
+        .stripe-blue-light { background: #3b82f6; box-shadow: 0 0 15px rgba(59, 130, 246, 0.6); }
+        .stripe-blue-dark { background: #1e3a8a; box-shadow: 0 0 15px rgba(30, 58, 138, 0.6); }
+        .stripe-red { background: #dc2626; box-shadow: 0 0 15px rgba(220, 38, 38, 0.6); }
+
+        /* ОБЩИЕ СТИЛИ */
+        .glass-panel {
+            background: rgba(10, 10, 10, 0.65);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: all 0.3s ease;
+        }
+        .glass-panel:hover {
+            border-color: #2563eb;
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.8);
+        }
+
+        .input-stealth {
+            background: rgba(255,255,255,0.05);
+            border: none;
+            border-bottom: 2px solid rgba(255,255,255,0.2);
+            color: white;
+            transition: all 0.3s;
+        }
+        .input-stealth:focus { outline: none; border-bottom-color: #2563eb; }
+
+        .video-bg {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: -2;
+        }
+        .overlay-bg {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 50%, #050505 100%);
+            z-index: -1;
+        }
+        
+        body::-webkit-scrollbar { width: 6px; }
+        body::-webkit-scrollbar-track { background: #000; }
+        body::-webkit-scrollbar-thumb { background: #333; }
+        
+        /* Анимация появления */
+        .fade-in-up {
+            animation: fadeInUp 1s ease-out forwards;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        @keyframes fadeInUp {
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="bg-marsel-black text-white font-sport overflow-x-hidden">
+
+    <!-- ФОН -->
+    <video autoplay muted loop playsinline class="video-bg">
+        <source src="video.mp4" type="video/mp4">
+    </video>
+    <div class="overlay-bg"></div>
+
+    <!-- НАВИГАЦИЯ -->
+    <nav class="fixed w-full z-50 top-0 left-0 border-b border-white/5 backdrop-blur-md bg-black/80">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            
+            <!-- ЛОГОТИП В МЕНЮ (Уменьшенный) -->
+            <a href="#" class="flex items-center group select-none">
+                <div class="m-stripes-container text-[24px]"> <!-- Размер шрифта регулирует размер полосок -->
+                    <div class="m-stripe stripe-blue-light"></div>
+                    <div class="m-stripe stripe-blue-dark"></div>
+                    <div class="m-stripe stripe-red"></div>
+                </div>
+                <span class="brand-text text-[24px] leading-none">MARSEL AUTO</span>
+            </a>
+            
+            <div class="hidden md:flex space-x-8 text-xs font-bold tracking-[0.15em] uppercase italic">
+                <a href="#services" class="hover:text-marsel-blue transition duration-300 py-2">Услуги</a>
+                <a href="#gallery" class="hover:text-marsel-blue transition duration-300 py-2">Портфолио</a>
+                <a href="#reviews" class="hover:text-marsel-blue transition duration-300 py-2">Отзывы</a>
+            </div>
+
+            <a href="#booking" class="hidden md:inline-block text-xs font-black italic tracking-widest uppercase bg-marsel-blue px-6 py-2 skew-x-[-15deg] hover:bg-white hover:text-black transition duration-300 shadow-[0_0_15px_rgba(37,99,235,0.4)]">
+                <span class="skew-x-[15deg] inline-block">Записаться</span>
+            </a>
+        </div>
+    </nav>
+
+    <!-- ГЛАВНЫЙ ЭКРАН -->
+    <header class="relative h-screen flex items-center justify-center text-center px-4">
+        <div class="max-w-7xl z-10 flex flex-col items-center">
+            
+            <!-- ГЛАВНЫЙ ЛОГОТИП (ОДНА СТРОКА) -->
+            <div class="flex items-center justify-center mb-10 select-none fade-in-up" style="animation-delay: 0.2s;">
+                
+                <!-- Полоски -->
+                <!-- text-[...px] задает высоту всей конструкции. Меняйте этот класс, чтобы менять размер лого -->
+                <div class="m-stripes-container text-[45px] md:text-[80px] lg:text-[110px]">
+                    <div class="m-stripe stripe-blue-light"></div>
+                    <div class="m-stripe stripe-blue-dark"></div>
+                    <div class="m-stripe stripe-red"></div>
+                </div>
+
+                <!-- Текст в одну строку -->
+                <h1 class="brand-text text-[45px] md:text-[80px] lg:text-[110px] leading-none whitespace-nowrap">
+                    MARSEL AUTO
+                </h1>
+            </div>
+            
+            <p class="text-gray-300 text-lg md:text-2xl italic font-bold tracking-widest max-w-3xl mx-auto mb-12 uppercase drop-shadow-md fade-in-up" style="animation-delay: 0.5s;">
+                Эстетика. Защита. Стиль.
+            </p>
+            
+            <div class="flex flex-col md:flex-row justify-center gap-6 w-full md:w-auto fade-in-up" style="animation-delay: 0.8s;">
+                <a href="#booking" class="group relative px-12 py-5 bg-marsel-blue overflow-hidden skew-x-[-15deg] hover:bg-white transition-colors duration-300 shadow-[0_0_30px_rgba(37,99,235,0.5)]">
+                    <span class="relative text-white group-hover:text-black font-black italic tracking-widest uppercase text-base skew-x-[15deg] inline-block">
+                        Связаться
+                    </span>
+                </a>
+                <a href="#gallery" class="group relative px-12 py-5 bg-transparent border-2 border-white overflow-hidden skew-x-[-15deg] hover:border-marsel-blue transition-colors duration-300">
+                    <span class="relative text-white font-black italic tracking-widest uppercase text-base skew-x-[15deg] inline-block">
+                        Наши работы
+                    </span>
+                </a>
+            </div>
+        </div>
+        
+        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce opacity-80">
+            <i class="fa-solid fa-angles-down text-marsel-blue text-3xl"></i>
+        </div>
+    </header>
+
+    <!-- УСЛУГИ -->
+    <section id="services" class="py-24 relative z-10 bg-gradient-to-b from-transparent to-black">
+        <div class="container mx-auto px-6">
+            <div class="flex items-end justify-between mb-16 border-b border-white/10 pb-4">
+                <h2 class="text-4xl md:text-5xl font-black italic text-white uppercase tracking-tighter">
+                    Услуги <span class="brand-text">MARSEL</span>
+                </h2>
+                <div class="hidden md:flex m-stripes-container text-[20px] opacity-80">
+                     <div class="m-stripe stripe-blue-light"></div><div class="m-stripe stripe-blue-dark"></div><div class="m-stripe stripe-red"></div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Карточка 1 -->
+                <div class="glass-panel p-8 rounded-2xl group relative overflow-hidden">
+                    <i class="fa-solid fa-gem text-5xl text-marsel-blue mb-8 group-hover:scale-110 transition duration-300"></i>
+                    <h3 class="font-black italic text-2xl mb-4 uppercase">Керамика 9H+</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-6 font-medium">Создание зеркального блеска и гидрофобного слоя. Автомобиль дольше остается чистым.</p>
+                    <a href="#booking" class="inline-flex items-center text-marsel-blue text-xs font-black italic uppercase tracking-widest hover:text-white transition">Записаться <i class="fa-solid fa-arrow-right ml-2"></i></a>
+                </div>
+
+                <!-- Карточка 2 -->
+                <div class="glass-panel p-8 rounded-2xl group relative overflow-hidden border-marsel-blue/30 shadow-[0_0_20px_rgba(37,99,235,0.1)]">
+                    <i class="fa-solid fa-shield-halved text-5xl text-marsel-blue mb-8 group-hover:scale-110 transition duration-300"></i>
+                    <h3 class="font-black italic text-2xl mb-4 uppercase">Оклейка PPF</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-6 font-medium">Антигравийная полиуретановая пленка. Максимальная защита от сколов и царапин.</p>
+                    <a href="#booking" class="inline-flex items-center text-marsel-blue text-xs font-black italic uppercase tracking-widest hover:text-white transition">Записаться <i class="fa-solid fa-arrow-right ml-2"></i></a>
+                </div>
+
+                <!-- Карточка 3 -->
+                <div class="glass-panel p-8 rounded-2xl group relative overflow-hidden">
+                    <i class="fa-solid fa-spray-can-sparkles text-5xl text-marsel-blue mb-8 group-hover:scale-110 transition duration-300"></i>
+                    <h3 class="font-black italic text-2xl mb-4 uppercase">Детейлинг Салона</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-6 font-medium">Глубокая химчистка, реставрация кожи и пластика. Возвращение запаха нового авто.</p>
+                    <a href="#booking" class="inline-flex items-center text-marsel-blue text-xs font-black italic uppercase tracking-widest hover:text-white transition">Записаться <i class="fa-solid fa-arrow-right ml-2"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ПОРТФОЛИО (ГАЛЕРЕЯ) -->
+    <section id="gallery" class="py-24 bg-marsel-black relative z-10">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl md:text-5xl font-black italic text-white uppercase mb-12 tracking-tighter text-center md:text-left">
+                Наши Работы <span class="text-marsel-blue">.</span>
+            </h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:auto-rows-[250px]">
+                
+                <!-- Фото 1 (Большое) - Процесс полировки / Темная эстетика -->
+                <div class="lg:col-span-2 lg:row-span-2 relative group overflow-hidden rounded-xl cursor-pointer">
+                    <img src="https://images.unsplash.com/photo-1621994153163-9f20e8315a6b?q=80&w=1600&auto=format&fit=crop" alt="Detailing Process" class="w-full h-full object-cover transition duration-700 transform group-hover:scale-105 opacity-90 group-hover:opacity-100">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-90"></div>
+                    <div class="absolute bottom-8 left-8">
+                        <div class="flex h-3 mb-2 skew-x-[-12deg] w-12"><span class="w-1/3 bg-blue-400"></span><span class="w-1/3 bg-blue-900"></span><span class="w-1/3 bg-red-600"></span></div>
+                        <h4 class="text-2xl font-black italic uppercase">Коррекция ЛКП</h4>
+                        <p class="text-gray-300 text-xs font-bold tracking-widest mt-1">Восстановительная полировка</p>
+                    </div>
+                </div>
+
+                <!-- Фото 2 - Гидрофоб / Блеск -->
+                <div class="relative group overflow-hidden rounded-xl cursor-pointer">
+                    <img src="https://images.unsplash.com/photo-1601362840469-51e4d8d58785?q=80&w=800&auto=format&fit=crop" alt="Ceramic Coating" class="w-full h-full object-cover transition duration-700 transform group-hover:scale-110 opacity-80 group-hover:opacity-100">
+                     <div class="absolute bottom-4 left-4">
+                        <p class="text-white text-sm font-black italic uppercase shadow-black drop-shadow-lg">Ceramic Pro 9H</p>
+                    </div>
+                </div>
+
+                <!-- Фото 3 - Интерьер / Кожа -->
+                <div class="relative group overflow-hidden rounded-xl cursor-pointer">
+                    <img src="https://images.unsplash.com/photo-1605218427306-022065d57a93?q=80&w=800&auto=format&fit=crop" alt="Interior" class="w-full h-full object-cover transition duration-700 transform group-hover:scale-110 opacity-80 group-hover:opacity-100">
+                    <div class="absolute bottom-4 left-4">
+                        <p class="text-white text-sm font-black italic uppercase shadow-black drop-shadow-lg">Детейлинг Кожи</p>
+                    </div>
+                </div>
+
+                <!-- Фото 4 (Широкое) - Готовый результат -->
+                <div class="lg:col-span-2 relative group overflow-hidden rounded-xl cursor-pointer">
+                    <img src="https://images.unsplash.com/photo-1553440569-bcc63803a83d?q=80&w=1200&auto=format&fit=crop" alt="Finished Car" class="w-full h-full object-cover transition duration-700 transform group-hover:scale-110 opacity-80 group-hover:opacity-100">
+                     <div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition"></div>
+                    <div class="absolute bottom-6 left-6">
+                        <p class="text-white text-lg font-black italic uppercase">Mercedes-Benz AMG GT</p>
+                        <p class="text-marsel-blue text-xs font-bold">Полная оклейка в матовый полиуретан</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ОТЗЫВЫ -->
+    <section id="reviews" class="py-24 relative z-10 bg-black/50">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl md:text-5xl font-black italic text-white uppercase mb-16 tracking-tighter">
+                Отзывы <span class="brand-text">MARSEL</span>
+            </h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- 1 -->
+                <div class="glass-panel p-8 rounded-2xl">
+                    <div class="flex text-marsel-blue mb-5 text-sm"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                    <p class="text-gray-300 text-sm mb-6 italic leading-relaxed">"Идеально поклеили пленку на BMW X7. Стыков не видно вообще, подвернули везде, где можно. Машина стала матовой, вид — бомба!"</p>
+                    <div class="flex items-center pt-4 border-t border-white/5">
+                         <div class="w-10 h-10 bg-gradient-to-br from-gray-700 to-black rounded-full flex items-center justify-center font-bold mr-3 border border-white/10">К</div>
+                         <div><p class="text-white font-bold uppercase text-sm">Константин</p><span class="text-xs text-gray-500">BMW X7</span></div>
+                    </div>
+                </div>
+                <!-- 2 -->
+                <div class="glass-panel p-8 rounded-2xl border-marsel-blue/20">
+                    <div class="flex text-marsel-blue mb-5 text-sm"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                    <p class="text-gray-300 text-sm mb-6 italic leading-relaxed">"Восстановили кожу на сиденье, думал придется перешивать. Сделали керамику кузова, блестит лучше новой."</p>
+                     <div class="flex items-center pt-4 border-t border-white/5">
+                         <div class="w-10 h-10 bg-gradient-to-br from-gray-700 to-black rounded-full flex items-center justify-center font-bold mr-3 border border-white/10">А</div>
+                         <div><p class="text-white font-bold uppercase text-sm">Александр</p><span class="text-xs text-gray-500">Range Rover</span></div>
+                    </div>
+                </div>
+                <!-- 3 -->
+                <div class="glass-panel p-8 rounded-2xl">
+                    <div class="flex text-marsel-blue mb-5 text-sm"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                    <p class="text-gray-300 text-sm mb-6 italic leading-relaxed">"Лучшая студия. Приезжаю уже на третьей машине. Качество всегда стабильное, сроки соблюдают. Рекомендую!"</p>
+                     <div class="flex items-center pt-4 border-t border-white/5">
+                         <div class="w-10 h-10 bg-gradient-to-br from-gray-700 to-black rounded-full flex items-center justify-center font-bold mr-3 border border-white/10">М</div>
+                         <div><p class="text-white font-bold uppercase text-sm">Максим</p><span class="text-xs text-gray-500">Porsche 911</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- КОНТАКТЫ -->
+    <section id="booking" class="py-24 bg-marsel-black border-t border-white/10 relative z-10">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16">
+                
+                <!-- Инфо -->
+                <div class="flex flex-col justify-center">
+                    <h2 class="text-4xl md:text-5xl font-black italic text-white uppercase mb-8">
+                        Запись <br><span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-blue-700">в студию</span>
+                    </h2>
+                    <p class="text-gray-400 mb-10 max-w-md text-lg">
+                        Оставьте заявку сейчас, и мы забронируем удобное время для вашего визита.
+                    </p>
+
+                    <div class="space-y-8">
+                        <div class="flex items-center group">
+                            <div class="w-12 h-12 flex items-center justify-center bg-white/5 rounded-lg mr-5 group-hover:bg-marsel-blue/20 transition duration-300 border border-white/5 group-hover:border-marsel-blue/50">
+                                <i class="fa-solid fa-location-dot text-marsel-blue text-2xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-white font-bold uppercase tracking-widest text-xs mb-1">Адрес</h4>
+                                <p class="text-gray-300 font-medium">Москва, Кутузовский проспект 12</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center group">
+                             <div class="w-12 h-12 flex items-center justify-center bg-white/5 rounded-lg mr-5 group-hover:bg-marsel-blue/20 transition duration-300 border border-white/5 group-hover:border-marsel-blue/50">
+                                <i class="fa-solid fa-phone text-marsel-blue text-2xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-white font-bold uppercase tracking-widest text-xs mb-1">Телефон</h4>
+                                <p class="text-white text-xl font-black italic">+7 (999) 000-00-00</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-12">
+                         <a href="tel:+79990000000" class="inline-flex items-center justify-center bg-marsel-blue text-white font-black italic text-lg px-12 py-6 skew-x-[-15deg] hover:bg-white hover:text-black transition duration-300 shadow-[0_0_30px_rgba(37,99,235,0.4)] w-full md:w-auto">
+                            <span class="skew-x-[15deg] flex items-center gap-3"><i class="fa-solid fa-phone-volume animate-pulse"></i> ПОЗВОНИТЬ</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Форма -->
+                <div class="glass-panel p-8 md:p-12 rounded-3xl relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-full h-1 bg-gradient-to-r from-blue-400 via-blue-800 to-red-600"></div>
+                    <form action="#" class="space-y-6">
+                        <div>
+                            <label class="text-xs text-marsel-blue font-black uppercase tracking-widest mb-2 block ml-1">Имя</label>
+                            <input type="text" placeholder="Иван" class="w-full p-4 input-stealth bg-transparent placeholder-gray-600 font-bold text-lg">
+                        </div>
+                        <div>
+                            <label class="text-xs text-marsel-blue font-black uppercase tracking-widest mb-2 block ml-1">Телефон</label>
+                            <input type="tel" placeholder="+7 (___) ___-__-__" class="w-full p-4 input-stealth bg-transparent placeholder-gray-600 font-bold text-lg">
+                        </div>
+                        <div class="grid grid-cols-2 gap-6">
+                            <div>
+                                <label class="text-xs text-marsel-blue font-black uppercase tracking-widest mb-2 block ml-1">Авто</label>
+                                <input type="text" placeholder="Марка" class="w-full p-4 input-stealth bg-transparent placeholder-gray-600 font-bold text-lg">
+                            </div>
+                            <div>
+                                <label class="text-xs text-marsel-blue font-black uppercase tracking-widest mb-2 block ml-1">Услуга</label>
+                                <select class="w-full p-4 input-stealth bg-transparent text-gray-400 font-bold cursor-pointer text-lg">
+                                    <option class="bg-black text-white">Консультация</option>
+                                    <option class="bg-black text-white">Керамика</option>
+                                    <option class="bg-black text-white">Пленка</option>
+                                    <option class="bg-black text-white">Химчистка</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <button class="w-full py-5 bg-white text-black font-black italic uppercase tracking-widest hover:bg-marsel-blue hover:text-white transition duration-300 mt-8 skew-x-[-5deg] text-lg shadow-lg">
+                            Отправить заявку
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-black py-12 border-t border-white/5 relative z-10">
+        <div class="container mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="flex items-center">
+                 <div class="m-stripes-container text-[20px]">
+                    <div class="m-stripe stripe-blue-light"></div>
+                    <div class="m-stripe stripe-blue-dark"></div>
+                    <div class="m-stripe stripe-red"></div>
+                </div>
+                <span class="brand-text text-xl font-black italic tracking-tighter">MARSEL AUTO</span>
+            </div>
+            <div class="text-gray-600 text-xs font-bold uppercase tracking-widest">
+                © 2025 MARSEL AUTO. DESIGNED FOR PERFORMANCE.
+            </div>
+            <div class="flex space-x-8 text-xl">
+                <a href="#" class="text-gray-400 hover:text-marsel-blue transition transform hover:scale-110"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#" class="text-gray-400 hover:text-marsel-blue transition transform hover:scale-110"><i class="fa-brands fa-telegram"></i></a>
+                <a href="#" class="text-gray-400 hover:text-marsel-blue transition transform hover:scale-110"><i class="fa-brands fa-whatsapp"></i></a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
